@@ -114,7 +114,7 @@ Input:112:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\rerunfilecheck\r
 Input:113:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
 Input:114:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\memoir\memhfixc.sty
 Input:115:D:/RPG\Stargate SG-1\Stargate-Hexenstag\commands.tex
-Input:116:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.aux
+Input:116:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.aux
 Input:117:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\tipa\t3cmr.fd
 Input:118:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdacmr.fd
 Input:119:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbcmr.fd
@@ -122,15 +122,15 @@ Input:120:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp
 Input:121:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
 Input:122:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 Input:123:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-bch.cfg
-Input:124:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.out
-Input:125:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.out
+Input:124:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.out
+Input:125:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.out
 Output:pdf
 Magnification:1000
 Unit:1
 X Offset:0
 Y Offset:0
 Content:
-!10697
+!10694
 {1
 [1,96:4736286,51739929:30146560,47003643,0
 h1,96:4736286,4736286:0,0,0
@@ -300,14 +300,14 @@ g1,96:34882846,51739929
 ]
 !3660
 }1
-Input:126:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.toc
+Input:126:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.toc
 Input:127:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\ot1mdbch.fd
 Input:128:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\omlmdbch.fd
 Input:129:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\omsmdbch.fd
 Input:130:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\omxmdbch.fd
 Input:131:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\mdamdbch.fd
 Input:132:C:\Users\Otto\AppData\Local\Programs\MiKTeX\tex\latex\mathdesign\mdbch\mdbmdbch.fd
-!647
+!646
 {2
 [1,117:4736286,51739929:30146560,47003643,285084
 (1,117:4736286,4736286:0,0,0
@@ -5231,18 +5231,17 @@ g134,37:2835265,27676921
 g134,37:16368890,27676921
 k134,37:2835265,27676921:-13140409
 r134,69:2835265,27676921:0,929585,285084
-x134,69:3045149,27676921
-g134,37:3977488,27676921
-x134,37:5645237,27676921
-g134,37:5855876,27676921
-x134,37:8479427,27676921
-g134,37:8690066,27676921
-$134,37:8690066,27676921
-(134,37:8690066,27375684:1548263,343264,7046
-x134,37:10205561,27375684
+g134,37:3767604,27676921
+x134,37:5435353,27676921
+g134,37:5645992,27676921
+x134,37:8269543,27676921
+g134,37:8480182,27676921
+$134,37:8480182,27676921
+(134,37:8480182,27375684:1548263,343264,7046
+x134,37:9995677,27375684
 )
-$134,37:10238329,27676921
-k134,37:15975674,27676921:5737345
+$134,37:10028445,27676921
+k134,37:15975674,27676921:5947229
 g134,37:16368890,27676921
 )
 g134,37:16368890,27676921
@@ -6337,7 +6336,7 @@ g134,69:34882846,51739929
 ]
 ]
 ]
-!63709
+!63683
 }3
 !10
 {4
@@ -97817,8 +97816,8 @@ g1,132:34882846,51739929
 ]
 !3479
 }57
-Input:159:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.lot
-!90
+Input:159:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.lot
+!89
 {58
 [1,154:4736286,51739929:30146560,47003643,285084
 (1,154:4736286,4736286:0,0,0
@@ -99293,8 +99292,8 @@ g1,154:34882846,51739929
 ]
 !35217
 }58
-Input:160:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.ind
-!91
+Input:160:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.ind
+!90
 {59
 [160,115:4736286,51739929:30146560,47003643,285084
 (160,115:4736286,4736286:0,0,0
@@ -100088,8 +100087,8 @@ g160,115:34882846,51739929
 ]
 !21145
 }59
-Input:161:C:\Users\Otto\AppData\Local\Temp\mik34626\_src\stargate-hexenstag.aux
-!91
+Input:161:C:\Users\Otto\AppData\Local\Temp\mik2561\_src\stargate-hexenstag.aux
+!90
 Postamble:
 Count:73076
 !27
