@@ -1,0 +1,490 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Revised Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+
+%fiddles with how chapter titles are displayed
+\renewcommand{\@makechapterhead}[1]{%
+\vspace*{0 pt}{%
+\raggedright \normalfont \fontsize{32}{32} \selectfont \bfseries%
+\ifnum \value{secnumdepth}>-1%
+  \if@mainmatter \vspace{-8pt} {\fontsize{20}{20} \selectfont Chapter \thechapter:}\\[8pt]%
+  \fi%
+\fi
+\hspace{0.65cm} #1\par\nobreak\vspace{20 pt}%
+}}
+
+%makes paragraphs show up closer together
+\renewcommand{\paragraph}{%
+\@startsection{paragraph}{4}%
+{\z@}{1.0ex \@plus 1ex \@minus 0.2ex}{-1em} % wtf is an 'ex' anyways?
+{\normalfont\normalsize\bfseries}%
+}
+
+%lets multicolumn have the proper background colors as defined by rowcolors
+\let\oldmc\multicolumn
+\newcommand{\mcinherit}{% Activate \multicolumn inheritance
+  \renewcommand{\multicolumn}[3]{%
+    \oldmc{##1}{##2}{\ifodd\rownum \@oddrowcolor\else\@evenrowcolor\fi ##3}%
+  }}
+
+\makeatother
+
+%only put chapters and sections into the TOC
+\setcounter{secnumdepth}{1}
+%makes a subsubsection start off indented.
+\setlength{\beforesubsubsecskip}{-\beforesubsubsecskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% General Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Two commands that can be compared to one another for \ifx logic tests.
+%\isempty should never be changed.
+%If \testempty holds a value of anything but empty, the test should return false.
+
+\newenvironment{basictable}[2]
+{
+\begin{table}[htb]
+\rowcolors{1}{white}{stargateblue}
+\caption{#1}
+\centering
+\begin{tabular}{#2}
+}{
+\end{tabular}
+\end{table}
+}
+
+\newenvironment{smallbasictable}[2]
+{
+\begin{table}[htb]
+\rowcolors{1}{white}{stargateblue}
+\caption{#1}
+\centering \small
+\begin{tabular}{#2}
+}{
+\end{tabular}
+\end{table}
+}
+
+\newenvironment{multicolsbasictable}[2]
+{
+\begin{center}
+\begin{small}
+\rowcolors{1}{white}{stargateblue}
+\begin{tabular}{#1}
+}{
+\end{tabular}
+\end{small}
+\end{center}
+}
+
+\newenvironment{spellperdaybasictable}
+{
+\begin{table}[htb]
+\rowcolors{1}{stargateblue}{white}
+\caption{Bonus Spells by Level}
+\small
+\centering
+\begin{tabular}{l l c c c l *{9}{c}}
+\multicolumn{3}{c}{\cellcolor{white}} & \multicolumn{8}{c}{\cellcolor{white}\textbf{Bonus Spells by Spell Level}}\\
+\textbf{Score} & \textbf{Modifier} & \textbf{0} & \textbf{1st} & \textbf{2nd} & \textbf{3rd}& \textbf{4th}&\textbf{5th}&\textbf{6th}&\textbf{7th}&\textbf{8th}&\textbf{9th}\\
+}{
+\end{tabular}
+\end{table}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Class Chapter Special Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\currentclassname}{foo}
+\newcommand{\classentry}[1]{\oldsubsection{#1}\index{#1}\label{class:#1}\renewcommand{\currentclassname}{#1}}
+%\newcommand{\Requirements}{\oldsubsubsection*{Requirements}}
+%\newcommand{\Basics}{\oldsubsubsection*{Basics}}
+\newcommand{\classfeatures}{\oldsubsubsection*{Class Features}
+All of the following are class features of the \currentclassname}
+
+%%%%Class Table Commands
+
+\newcommand{\gbab}{\empty}
+\newcommand{\mbab}{\empty}
+
+\newcommand{\fort}{\empty}
+\newcommand{\mfort}{\empty}
+
+\newcommand{\refl}{\empty}
+\newcommand{\mrefl}{\empty}
+
+\newcommand{\will}{\empty}
+\newcommand{\mwill}{\empty}
+
+\newcommand{\defb}{\empty}
+\newcommand{\mdefb}{\empty}
+
+\newcommand{\init}{\empty}
+\newcommand{\minit}{\empty}
+
+\newcommand{\gear}{\empty}
+\newcommand{\mgear}{\empty}
+
+\newcommand{\res}{\empty}
+\newcommand{\mres}{\empty}
+%Creates new commands for use in \ifx statements for formatting purposes.
+
+\newcommand{\goodbab}{\renewcommand{\gbab}{\empty}\renewcommand{\mbab}{a}}
+\newcommand{\modebab}{\renewcommand{\gbab}{a}\renewcommand{\mbab}{\empty}}
+\newcommand{\poorbab}{\renewcommand{\gbab}{a}\renewcommand{\mbab}{a}}
+%A set of commands to tell LaTeX what BAB progression the class has. Only one should be called per class.
+
+\newcommand{\goodfor}{\renewcommand{\fort}{\empty}\renewcommand{\mfort}{a}}
+\newcommand{\modefor}{\renewcommand{\fort}{a}\renewcommand{\mfort}{\empty}}
+\newcommand{\poorfor}{\renewcommand{\fort}{a}\renewcommand{\mfort}{a}}
+%A set of commands to tell LaTeX what Fortitude progression the class has. Only one should be called per class.
+
+\newcommand{\goodref}{\renewcommand{\refl}{\empty}\renewcommand{\mrefl}{a}}
+\newcommand{\moderef}{\renewcommand{\refl}{a}\renewcommand{\mrefl}{\empty}}
+\newcommand{\poorref}{\renewcommand{\refl}{a}\renewcommand{\mrefl}{a}}
+%A set of commands to tell LaTeX what Reflex progression the class has. Only one should be called per class.
+
+\newcommand{\goodwil}{\renewcommand{\will}{\empty}\renewcommand{\mwill}{a}}
+\newcommand{\modewil}{\renewcommand{\will}{a}\renewcommand{\mwill}{\empty}}
+\newcommand{\poorwil}{\renewcommand{\will}{a}\renewcommand{\mwill}{a}}
+%A set of commands to tell LaTeX what Will progression the class has. Only one should be called per class.
+
+\newcommand{\gooddefb}{\renewcommand{\defb}{\empty}\renewcommand{\mdefb}{a}}
+\newcommand{\modedefb}{\renewcommand{\defb}{a}\renewcommand{\mdefb}{\empty}}
+\newcommand{\poordefb}{\renewcommand{\defb}{a}\renewcommand{\mdefb}{a}}
+
+\newcommand{\goodinit}{\renewcommand{\init}{\empty}\renewcommand{\minit}{a}}
+\newcommand{\modeinit}{\renewcommand{\init}{a}\renewcommand{\minit}{\empty}}
+\newcommand{\poorinit}{\renewcommand{\init}{a}\renewcommand{\minit}{a}}
+
+\newcommand{\goodgear}{\renewcommand{\gear}{\empty}\renewcommand{\mgear}{a}}
+\newcommand{\modegear}{\renewcommand{\gear}{a}\renewcommand{\mgear}{\empty}}
+\newcommand{\poorgear}{\renewcommand{\gear}{a}\renewcommand{\mgear}{a}}
+
+\newcommand{\goodres}{\renewcommand{\res}{\empty}\renewcommand{\mres}{a}}
+\newcommand{\moderes}{\renewcommand{\res}{a}\renewcommand{\mres}{\empty}}
+\newcommand{\poorres}{\renewcommand{\res}{a}\renewcommand{\mres}{a}}
+
+\newenvironment{classtable}
+{
+\begin{table}[htb]
+\rowcolors{1}{white}{stargateblue}
+\caption{The \currentclassname}
+\small
+\centering
+\begin{tabular}{l c c c c c c c c l}
+\textbf{Level} & \textbf{BAB} & \textbf{Fort} & \textbf{Reflex} & \textbf{Will} & \textbf{Defense} & \textbf{Initiative} & \textbf{Gear Picks} & \textbf{Res Pts} & \textbf{Special}\\
+}{
+\end{tabular}
+\end{table}
+}
+%A a new environment that sets up the class tables. Include the \level commands between \begin{classtable}.
+
+\newenvironment{extraclasstable}[1]
+{
+\begin{table}[htb]
+\rowcolors{1}{white}{stargateblue}
+\caption{The \currentclassname}
+\small
+\centering
+\begin{tabular}{l l *{3}{c} l c}
+\textbf{Level} & \textbf{BAB} & \textbf{Fort} & \textbf{Reflex} & \textbf{Will} & \textbf{Special} & #1\\
+}{
+\end{tabular}
+\end{table}
+}
+%A a new environment that sets up the class tables. Include the \level commands between \begin{classtable}
+
+\newenvironment{minorcastingclasstable}
+{
+\begin{table}[htb]
+\rowcolors{1}{stargateblue}{white}
+\caption{The \currentclassname}
+\small
+\centering
+\begin{tabular}{l l *{5}{c} l *{8}{c}}
+\multicolumn{6}{c}{\cellcolor{white}} & \multicolumn{6}{c}{\cellcolor{white} \textbf{Spells Per Day}}\\
+\textbf{Level} & \textbf{BAB} & \textbf{Fort} & \textbf{Ref} & \textbf{Will} & \textbf{Special} & \textbf{0}&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{6}\\
+}{
+\end{tabular}
+\end{table}
+}
+%A a new environment similar to classtable, but with columns for a minor (zero through six) spell slot progression.
+%uses "reverse" rowcolors from the base classtable because of the extra row that says "spells per day"
+
+\newenvironment{fullcastingclasstable}
+{
+\begin{table}[htb]
+\rowcolors{1}{stargateblue}{white}
+\caption{The \currentclassname}
+\small
+\centering
+\begin{tabular}{l l c c c l *{10}{c}}
+\multicolumn{6}{c}{\cellcolor{white}} & \multicolumn{9}{c}{\cellcolor{white}\textbf{Spells Per Day}}\\
+\textbf{Level} & \textbf{BAB} & \textbf{Fort} & \textbf{Ref} & \textbf{Wil} & \textbf{Special}& \textbf{0}&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{6}&\textbf{7}&\textbf{8}&\textbf{9}\\
+}{
+\end{tabular}
+\end{table}
+}
+
+\newenvironment{monkclasstable}
+{
+\begin{table}[htb]
+\rowcolors{1}{white}{stargateblue}
+\caption{The \currentclassname}
+\small
+\centering
+\begin{tabular}{l l *{3}{c} l c}
+\textbf{Level} & \textbf{BAB} & \textbf{Fort} & \textbf{Reflex} & \textbf{Will} & \textbf{Special} & \textbf{AC Bonus}\\
+}{
+\end{tabular}
+\end{table}
+}
+
+%Another environment for class tables, this one for full (0 through 9) spell slot progression.
+%uses "reverse" rowcolors from the base classtable because of the extra row that says "spells per day"
+
+\newcommand{\levelone}[1]{
+1st  & \ifx\gbab\isempty +1 \else\ifx\mbab\isempty +0 \else +0 \fi \fi
+	 & \ifx\fort\isempty +2 \else\ifx\mfort\isempty +1 \else +0 \fi \fi
+	 & \ifx\refl\isempty +2 \else\ifx\mrefl\isempty +1 \else +0 \fi \fi
+	 & \ifx\will\isempty +2 \else\ifx\mwill\isempty +1 \else +0 \fi \fi
+	 & \ifx\defb\isempty +1 \else\ifx\mdefb\isempty +1 \else 0 \fi \fi
+	 & \ifx\init\isempty +1 \else\ifx\minit\isempty +1 \else +0 \fi \fi
+	 & \ifx\gear\isempty +2 \else\ifx\mgear\isempty +1 \else +0 \fi \fi
+	 & \ifx\res\isempty +1 \else\ifx\mres\isempty +0 \else +0 \fi \fi
+	 & #1 \\}
+%A command that declares a table row within the class feature table.
+
+\newcommand{\leveltwo}[1]{
+2nd  & \ifx\gbab\isempty +2 \else\ifx\mbab\isempty +1 \else +1 \fi \fi
+	 & \ifx\fort\isempty +3 \else\ifx\mfort\isempty +2 \else +1 \fi \fi
+	 & \ifx\refl\isempty +3 \else\ifx\mrefl\isempty +2 \else +1 \fi \fi
+	 & \ifx\will\isempty +3 \else\ifx\mwill\isempty +2 \else +1 \fi \fi
+	 & \ifx\defb\isempty +2 \else\ifx\mdefb\isempty +1 \else +1 \fi \fi
+	 & \ifx\init\isempty +2 \else\ifx\minit\isempty +1 \else +1 \fi \fi
+	 & \ifx\gear\isempty +3 \else\ifx\mgear\isempty +2 \else +1 \fi \fi
+	 & \ifx\res\isempty +2 \else\ifx\mres\isempty +1 \else +1 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelthree}[1]{
+3rd  & \ifx\gbab\isempty +3 \else\ifx\mbab\isempty +2 \else +1 \fi \fi
+	 & \ifx\fort\isempty +3 \else\ifx\mfort\isempty +2 \else +1 \fi \fi
+	 & \ifx\refl\isempty +3 \else\ifx\mrefl\isempty +2 \else +1 \fi \fi
+	 & \ifx\will\isempty +3 \else\ifx\mwill\isempty +2 \else +1 \fi \fi
+	 & \ifx\defb\isempty +3 \else\ifx\mdefb\isempty +2 \else +1 \fi \fi
+	 & \ifx\init\isempty +3 \else\ifx\minit\isempty +2 \else +1 \fi \fi
+	 & \ifx\gear\isempty +3 \else\ifx\mgear\isempty +2 \else +1 \fi \fi
+	 & \ifx\res\isempty +3 \else\ifx\mres\isempty +2 \else +1 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelfour}[1]{
+4th  & \ifx\gbab\isempty +4 \else\ifx\mbab\isempty +3 \else +2\fi \fi
+	 & \ifx\fort\isempty +4 \else\ifx\mfort\isempty +2 \else +1 \fi \fi
+	 & \ifx\refl\isempty +4 \else\ifx\mrefl\isempty +2 \else +1 \fi \fi
+	 & \ifx\will\isempty +4 \else\ifx\mwill\isempty +2 \else +1 \fi \fi
+	 & \ifx\defb\isempty +3 \else\ifx\mdefb\isempty +2 \else +2 \fi \fi
+	 & \ifx\init\isempty +3 \else\ifx\minit\isempty +2 \else +2 \fi \fi
+	 & \ifx\gear\isempty +4 \else\ifx\mgear\isempty +2 \else +1 \fi \fi
+	 & \ifx\res\isempty +4 \else\ifx\mres\isempty +3 \else +2 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelfive}[1]{
+5th  & \ifx\gbab\isempty +5 \else\ifx\mbab\isempty +3 \else +2 \fi \fi
+	 & \ifx\fort\isempty +4 \else\ifx\mfort\isempty +3 \else +1 \fi \fi
+	 & \ifx\refl\isempty +4 \else\ifx\mrefl\isempty +3 \else +1 \fi \fi
+	 & \ifx\will\isempty +4 \else\ifx\mwill\isempty +3 \else +1 \fi \fi
+	 & \ifx\defb\isempty +4 \else\ifx\mdefb\isempty +3 \else +2 \fi \fi
+	 & \ifx\init\isempty +4 \else\ifx\minit\isempty +3 \else +2 \fi \fi
+	 & \ifx\gear\isempty +4 \else\ifx\mgear\isempty +3 \else +1 \fi \fi
+	 & \ifx\res\isempty +5 \else\ifx\mres\isempty +3 \else +2 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelsix}[1]{
+6th  & \ifx\gbab\isempty +6 \else\ifx\mbab\isempty +4 \else +3 \fi \fi
+	 & \ifx\fort\isempty +5 \else\ifx\mfort\isempty +3 \else +2 \fi \fi
+	 & \ifx\refl\isempty +5 \else\ifx\mrefl\isempty +3 \else +2 \fi \fi
+	 & \ifx\will\isempty +5 \else\ifx\mwill\isempty +3 \else +2 \fi \fi
+	 & \ifx\defb\isempty +5 \else\ifx\mdefb\isempty +4 \else +2 \fi \fi
+	 & \ifx\init\isempty +5 \else\ifx\minit\isempty +4 \else +2 \fi \fi
+	 & \ifx\gear\isempty +5 \else\ifx\mgear\isempty +3 \else +2 \fi \fi
+	 & \ifx\res\isempty +6 \else\ifx\mres\isempty +4 \else +3 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelseven}[1]{
+7th  & \ifx\gbab\isempty +7 \else\ifx\mbab\isempty +5 \else +3 \fi \fi
+	 & \ifx\fort\isempty +5 \else\ifx\mfort\isempty +4 \else +2 \fi \fi
+	 & \ifx\refl\isempty +5 \else\ifx\mrefl\isempty +4 \else +2 \fi \fi
+	 & \ifx\will\isempty +5 \else\ifx\mwill\isempty +4 \else +2 \fi \fi
+	 & \ifx\defb\isempty +6 \else\ifx\mdefb\isempty +4 \else +3 \fi \fi
+	 & \ifx\init\isempty +6 \else\ifx\minit\isempty +4 \else +3 \fi \fi
+	 & \ifx\gear\isempty +5 \else\ifx\mgear\isempty +4 \else +2 \fi \fi
+	 & \ifx\res\isempty +7 \else\ifx\mres\isempty +5 \else +3 \fi \fi
+	 & #1 \\}
+
+\newcommand{\leveleight}[1]{
+8th  & \ifx\gbab\isempty +8 \else\ifx\mbab\isempty +6 \else +4 \fi \fi
+	 & \ifx\fort\isempty +6 \else\ifx\mfort\isempty +4 \else +2 \fi \fi
+	 & \ifx\refl\isempty +6 \else\ifx\mrefl\isempty +4 \else +2 \fi \fi
+	 & \ifx\will\isempty +6 \else\ifx\mwill\isempty +4 \else +2 \fi \fi
+	 & \ifx\defb\isempty +6 \else\ifx\mdefb\isempty +5 \else +3 \fi \fi
+	 & \ifx\init\isempty +6 \else\ifx\minit\isempty +5 \else +3 \fi \fi
+	 & \ifx\gear\isempty +6 \else\ifx\mgear\isempty +4 \else +2 \fi \fi
+	 & \ifx\res\isempty +8 \else\ifx\mres\isempty +6 \else +4 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelnine}[1]{
+9th  & \ifx\gbab\isempty +9 \else\ifx\mbab\isempty +6 \else +4 \fi \fi
+	 & \ifx\fort\isempty +6 \else\ifx\mfort\isempty +4 \else +3 \fi \fi
+	 & \ifx\refl\isempty +6 \else\ifx\mrefl\isempty +4 \else +3 \fi \fi
+	 & \ifx\will\isempty +6 \else\ifx\mwill\isempty +4 \else +3 \fi \fi
+	 & \ifx\defb\isempty +7 \else\ifx\mdefb\isempty +5 \else +4 \fi \fi
+	 & \ifx\init\isempty +7 \else\ifx\minit\isempty +5 \else +4 \fi \fi
+	 & \ifx\gear\isempty +6 \else\ifx\mgear\isempty +4 \else +3 \fi \fi
+	 & \ifx\res\isempty +9 \else\ifx\mres\isempty +6 \else +4 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelten}[1]{
+10th & \ifx\gbab\isempty +10 \else\ifx\mbab\isempty +7 \else +5 \fi \fi
+	 & \ifx\fort\isempty +7 \else\ifx\mfort\isempty +5 \else +3 \fi \fi
+	 & \ifx\refl\isempty +7 \else\ifx\mrefl\isempty +5 \else +3 \fi \fi
+	 & \ifx\will\isempty +7 \else\ifx\mwill\isempty +5 \else +3 \fi \fi
+	 & \ifx\defb\isempty +8 \else\ifx\mdefb\isempty +6 \else +4 \fi \fi
+	 & \ifx\init\isempty +8 \else\ifx\minit\isempty +6 \else +4 \fi \fi
+	 & \ifx\gear\isempty +7 \else\ifx\mgear\isempty +5 \else +3 \fi \fi
+	 & \ifx\res\isempty +10 \else\ifx\mres\isempty +7 \else +5 \fi \fi
+	 & #1 \\}
+
+\newcommand{\leveleleven}[1]{
+11th & \ifx\gbab\isempty +11 \else\ifx\mbab\isempty +8 \else +5 \fi \fi
+	 & \ifx\fort\isempty +7 \else\ifx\mfort\isempty +5 \else +3 \fi \fi
+	 & \ifx\refl\isempty +7 \else\ifx\mrefl\isempty +5 \else +3 \fi \fi
+	 & \ifx\will\isempty +7 \else\ifx\mwill\isempty +5 \else +3 \fi \fi
+	 & \ifx\defb\isempty +9 \else\ifx\mdefb\isempty +7 \else +4 \fi \fi
+	 & \ifx\init\isempty +9 \else\ifx\minit\isempty +7 \else +4 \fi \fi
+	 & \ifx\gear\isempty +7 \else\ifx\mgear\isempty +5 \else +3 \fi \fi
+	 & \ifx\res\isempty +11 \else\ifx\mres\isempty +8 \else +5 \fi \fi
+	 & #1 \\}
+
+\newcommand{\leveltwelve}[1]{
+12th & \ifx\gbab\isempty +12 \else\ifx\mbab\isempty +9 \else +6 \fi \fi
+	 & \ifx\fort\isempty +8 \else\ifx\mfort\isempty +6 \else +4 \fi \fi
+	 & \ifx\refl\isempty +8 \else\ifx\mrefl\isempty +6 \else +4 \fi \fi
+	 & \ifx\will\isempty +8 \else\ifx\mwill\isempty +6 \else +4 \fi \fi
+	 & \ifx\defb\isempty +10 \else\ifx\mdefb\isempty +7 \else +5 \fi \fi
+	 & \ifx\init\isempty +10 \else\ifx\minit\isempty +7 \else +5 \fi \fi
+	 & \ifx\gear\isempty +8 \else\ifx\mgear\isempty +6 \else +4 \fi \fi
+	 & \ifx\res\isempty +12 \else\ifx\mres\isempty +9 \else +6 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelthirteen}[1]{
+13th & \ifx\gbab\isempty +13 \else\ifx\mbab\isempty +9 \else +6 \fi \fi
+	 & \ifx\fort\isempty +8 \else\ifx\mfort\isempty +6 \else +4 \fi \fi
+	 & \ifx\refl\isempty +8 \else\ifx\mrefl\isempty +6 \else +4 \fi \fi
+	 & \ifx\will\isempty +8 \else\ifx\mwill\isempty +6 \else +4 \fi \fi
+	 & \ifx\defb\isempty +10 \else\ifx\mdefb\isempty +8 \else +5 \fi \fi
+	 & \ifx\init\isempty +10 \else\ifx\minit\isempty +8 \else +5 \fi \fi
+	 & \ifx\gear\isempty +8 \else\ifx\mgear\isempty +6 \else +4 \fi \fi
+	 & \ifx\res\isempty +13 \else\ifx\mres\isempty +9 \else +6 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelfourteen}[1]{
+14th & \ifx\gbab\isempty +14 \else\ifx\mbab\isempty +10 \else +7 \fi \fi
+	 & \ifx\fort\isempty +9 \else\ifx\mfort\isempty +6 \else +4 \fi \fi
+	 & \ifx\refl\isempty +9 \else\ifx\mrefl\isempty +6 \else +4 \fi \fi
+	 & \ifx\will\isempty +9 \else\ifx\mwill\isempty +6 \else +4 \fi \fi
+	 & \ifx\defb\isempty +11 \else\ifx\mdefb\isempty +8 \else +6 \fi \fi
+	 & \ifx\init\isempty +11 \else\ifx\minit\isempty +8 \else +6 \fi \fi
+	 & \ifx\gear\isempty +9 \else\ifx\mgear\isempty +6 \else +4 \fi \fi
+	 & \ifx\res\isempty +14 \else\ifx\mres\isempty +10 \else +7 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelfifteen}[1]{
+15th & \ifx\gbab\isempty +15 \else\ifx\mbab\isempty +11 \else +7 \fi \fi
+	 & \ifx\fort\isempty +9 \else\ifx\mfort\isempty +7 \else +5 \fi \fi
+	 & \ifx\refl\isempty +9 \else\ifx\mrefl\isempty +7 \else +5 \fi \fi
+	 & \ifx\will\isempty +9 \else\ifx\mwill\isempty +7 \else +5 \fi \fi
+	 & \ifx\defb\isempty +12 \else\ifx\mdefb\isempty +9 \else +6 \fi \fi
+	 & \ifx\init\isempty +12 \else\ifx\minit\isempty +9 \else +6 \fi \fi
+	 & \ifx\gear\isempty +9 \else\ifx\mgear\isempty +7 \else +5 \fi \fi
+	 & \ifx\res\isempty +15 \else\ifx\mres\isempty +11 \else +7 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelsixteen}[1]{
+16th & \ifx\gbab\isempty +16 \else\ifx\mbab\isempty +12 \else +8 \fi \fi
+	 & \ifx\fort\isempty +10 \else\ifx\mfort\isempty +7 \else +5 \fi \fi
+	 & \ifx\refl\isempty +10 \else\ifx\mrefl\isempty +7 \else +5 \fi \fi
+	 & \ifx\will\isempty +10 \else\ifx\mwill\isempty +7 \else +5 \fi \fi
+	 & \ifx\defb\isempty +13 \else\ifx\mdefb\isempty +10 \else +6 \fi \fi
+	 & \ifx\init\isempty +13 \else\ifx\minit\isempty +10 \else +6 \fi \fi
+	 & \ifx\gear\isempty +10 \else\ifx\mgear\isempty +7 \else +5 \fi \fi
+	 & \ifx\res\isempty +16 \else\ifx\mres\isempty +12 \else +8 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelseventeen}[1]{
+17th & \ifx\gbab\isempty +17 \else\ifx\mbab\isempty +12 \else +8 \fi \fi
+	 & \ifx\fort\isempty +10 \else\ifx\mfort\isempty +8 \else +5 \fi \fi
+	 & \ifx\refl\isempty +10 \else\ifx\mrefl\isempty +8 \else +5 \fi \fi
+	 & \ifx\will\isempty +10 \else\ifx\mwill\isempty +8 \else +5 \fi \fi
+	 & \ifx\defb\isempty +14 \else\ifx\mdefb\isempty +10 \else +7 \fi \fi
+	 & \ifx\init\isempty +14 \else\ifx\minit\isempty +10 \else +7 \fi \fi
+	 & \ifx\gear\isempty +10 \else\ifx\mgear\isempty +8 \else +5 \fi \fi
+	 & \ifx\res\isempty +17 \else\ifx\mres\isempty +12 \else +8 \fi \fi
+	 & #1 \\}
+
+\newcommand{\leveleighteen}[1]{
+18th & \ifx\gbab\isempty +18 \else\ifx\mbab\isempty +13 \else +9 \fi \fi
+	 & \ifx\fort\isempty +11 \else\ifx\mfort\isempty +8 \else +6 \fi \fi
+	 & \ifx\refl\isempty +11 \else\ifx\mrefl\isempty +8 \else +6 \fi \fi
+	 & \ifx\will\isempty +11 \else\ifx\mwill\isempty +8 \else +6 \fi \fi
+	 & \ifx\defb\isempty +14 \else\ifx\mdefb\isempty +11 \else +7 \fi \fi
+	 & \ifx\init\isempty +14 \else\ifx\minit\isempty +11 \else +7 \fi \fi
+	 & \ifx\gear\isempty +11 \else\ifx\mgear\isempty +8 \else +6 \fi \fi
+	 & \ifx\res\isempty +18 \else\ifx\mres\isempty +13 \else +9 \fi \fi
+	 & #1 \\}
+
+\newcommand{\levelnineteen}[1]{
+19th & \ifx\gbab\isempty +19 \else\ifx\mbab\isempty +14 \else +9 \fi \fi
+	 & \ifx\fort\isempty +11 \else\ifx\mfort\isempty +8 \else +6 \fi \fi
+	 & \ifx\refl\isempty +11 \else\ifx\mrefl\isempty +8 \else +6 \fi \fi
+	 & \ifx\will\isempty +11 \else\ifx\mwill\isempty +8 \else +6 \fi \fi
+	 & \ifx\defb\isempty +15 \else\ifx\mdefb\isempty +11 \else +8 \fi \fi
+	 & \ifx\init\isempty +15 \else\ifx\minit\isempty +11 \else +8 \fi \fi
+	 & \ifx\gear\isempty +11 \else\ifx\mgear\isempty +8 \else +6 \fi \fi
+	 & \ifx\res\isempty +19 \else\ifx\mres\isempty +14 \else +9 \fi \fi
+	 & #1 \\}
+
+\newcommand{\leveltwenty}[1]{
+20th & \ifx\gbab\isempty +20 \else\ifx\mbab\isempty +15 \else +10 \fi \fi
+	 & \ifx\fort\isempty +12 \else\ifx\mfort\isempty +9 \else +6 \fi \fi
+	 & \ifx\refl\isempty +12 \else\ifx\mrefl\isempty +9 \else +6 \fi \fi
+	 & \ifx\will\isempty +12 \else\ifx\mwill\isempty +9 \else +6 \fi \fi
+	 & \ifx\defb\isempty +16 \else\ifx\mdefb\isempty +12 \else +8 \fi \fi
+	 & \ifx\init\isempty +16 \else\ifx\minit\isempty +12 \else +8 \fi \fi
+	 & \ifx\gear\isempty +12 \else\ifx\mgear\isempty +9 \else +6 \fi \fi
+	 & \ifx\res\isempty +20 \else\ifx\mres\isempty +15 \else +10 \fi \fi
+	 & #1 \\}

@@ -3,7 +3,6 @@
 \setlength{\paperheight}{28cm}
 \setlength{\paperwidth}{20cm}
 \setstocksize{\paperheight}{\paperwidth}
-
 \setlrmarginsandblock{1.3cm}{1.3cm}{*}
 \setulmarginsandblock{1.3cm}{1.3cm}{*}
 \checkandfixthelayout
@@ -39,16 +38,13 @@
 \usepackage{placeins}
 \usepackage{floatflt}
 \usepackage{anyfontsize}
-\usepackage{colortbl}
 \usepackage{tabularx}
 \usepackage{mdframed}
-\usepackage{longtable}
 \usepackage{tabu}
 \usepackage{afterpage}
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{tabto}
-
 \usepackage{adjustbox}
 \usepackage{arydshln}
 
@@ -59,56 +55,108 @@
 
 \usepackage[colorlinks=true,linkcolor=blue,urlcolor=links,bookmarksdepth=3,pdfstartview={XYZ null null 1.00}]{hyperref}
 
+% Input commands.tex (unchanged)
 \input{commands}
 
-\begin{document}
+% Patch for \linksubspecialty and similar commands to fix 'g' argument type
+\RenewDocumentCommand{\linksubspecialty}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[subspecialty:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[subspecialty:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkspecialty}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[specialty:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[specialty:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkweapon}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[weapon:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[weapon:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkrace}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[race:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[race:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkclass}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[class:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[class:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkskill}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[skill:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[skill:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkfeat}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[feat:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[feat:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkspell}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[spell:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[spell:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkcondition}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[condition:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[condition:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkability}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[ability:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[ability:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linksec}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[sec:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[sec:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linkdomain}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[domain:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[domain:#1]{#2}}% optional arg, link to first and display second
+}
+\RenewDocumentCommand{\linksphere}{mo}{%
+  \IfNoValueTF{#2}
+    {\hyperref[sphere:#1]{#1}}% no optional arg, display is same as link
+    {\hyperref[sphere:#1]{#2}}% optional arg, link to first and display second
+}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Title Page
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
 
 \sffamily
 \pagestyle{plain}
 \raggedbottom
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% OPORD Table (unchanged, keeping it static as in your working version)
 \begin{table}[ht]
 \begin{adjustbox}{width=\columnwidth,center}
-%\rowcolors{1}{white}{stargateblue}
 \begin{tabular}{| l c l c |}
-
 \hline
-
 &&\multicolumn{2}{r |}{\multirow{3}{*}{\includegraphics[scale=.0575]{cover-images/Seal-USAF.png}}}\\
-
 \multicolumn{2}{| l}{\Large{\textbf{OPORD}}} &&\\
 \multicolumn{2}{| l}{\large{\textbf{Operational Orders}}} &&\\
 &\tiny{\textbf{FORM C7-R2}} &&\\
 \hline
-
 &&&\\
 \multicolumn{4}{| c |}{\large{\textbf{SG Team Mission Briefing}}}\\
 \hdashline
 &&&\\
-
 \multicolumn{2}{| c}{\textbf{SG Team Number}} & \multicolumn{2}{c |}{\textbf{Planet Coordinates}}\\
 \multicolumn{2}{| c}{SG-4} & \multicolumn{2}{c |}{GKA-V\AE K}\\
 \hline
-
 &&&\\
 \multicolumn{2}{| l}{\textbf{Date:}} & \multicolumn{2}{l |}{July 1, 1999}\\
 \hline
-
 &&&\\
 \multicolumn{4}{| c |}{\large{\textbf{Team Assignments}}}\\
 \hdashline
 &&&\\
 \multicolumn{4}{| l |}{Exploration, Scientific Ops, Diplomatic Ops.}\\
 \hline
-
 &&&\\
 \multicolumn{4}{| c |}{\large{\textbf{Situation}}}\\
 \hdashline
@@ -120,92 +168,70 @@
 \hdashline
 &&\multicolumn{1}{: l}{}&\\
 \textbf{Thermosphere:} & Warm \hspace{10mm} & \multicolumn{1}{: l}{\textbf{Hydrosphere:}}  & Desert\\
-
 \hline
-
 &&&\\
 \multicolumn{4}{| c |}{\large{\textbf{Mission Details}}}\\
 \hdashline
 &&&\\
-\multicolumn{4}{| p{12cm} |}{Scout the Area, make First Contact (if Human), Find any Resources or Weapons to help with the fight against  the Goa'uld.}\\
+\multicolumn{4}{| p{12cm} |}{Scout the Area, make First Contact (if Human), Find any Resources or Weapons to help with the fight against the Goa'uld.}\\
 \hline
-
 &&&\\
 \multicolumn{4}{| c |}{\large{\textbf{Service and Support}}}\\
 \hdashline
 &&&\\
 \multicolumn{4}{| p{12cm} |}{SG Team Bundle, Scouting Bundle.}\\
 \hline
-
-
 \end{tabular}
 \end{adjustbox}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OPREP Table (updated with text-wrapping \TextFields, keeping smaller heights)
+\begin{table}[ht]
+\begin{adjustbox}{width=\columnwidth,center}
+\begin{tabular}{| l c l c |}
+\hline
+&&\multicolumn{2}{r |}{\multirow{3}{*}{\includegraphics[scale=.0575]{cover-images/Seal-USAF.png}}}\\
+\multicolumn{2}{| l}{\Large{\textbf{OPREP}}} &&\\
+\multicolumn{2}{| l}{\large{\textbf{Operational Report}}} &&\\
+\multicolumn{1}{| r}{\tiny{\textbf{FORM G7-R2}}} &&&\\
+\hline
+&&&\\
+\multicolumn{1}{| l}{\textbf{Date:}} & \multicolumn{3}{l |}{\TextField[name=date, width=9.5cm, height=0.4cm, bordercolor={}]{}}\\
+\hdashline
+&&&\\
+\multicolumn{1}{| l}{\textbf{Attachments:}} & \multicolumn{3}{l |}{\multirow{2}{*}{\TextField[name=attachments, width=9.5cm, height=1.4cm, bordercolor={}, multiline=true]{}}}\\
+\multicolumn{1}{| p{5cm}}{(Photos, Maps, Addendums, Additional Reports)} & & & \\
+\hline
+&&&\\
+\multicolumn{4}{| c |}{\large{\textbf{Mission Log/Report}}}\\
+\hdashline
+&&&\\
+\textbf{World Name:} & \multicolumn{3}{l |}{\multirow{2}{*}{\TextField[name=world-name, width=9.5cm, height=0.89cm, bordercolor={}, multiline=true]{}}}\\
+\multicolumn{1}{| p{5cm}}{(Code \& Local Name)} & & & \\
+\hdashline
+&&&\\
+\textbf{Mission Duration:} & \multicolumn{3}{l |}{\TextField[name=mission-duration, width=9.5cm, height=0.4cm, bordercolor={}, multiline=true]{}}\\
+\hdashline
+&&&\\
+\textbf{Mission Objectives:} & \multicolumn{3}{l |}{\TextField[name=mission-objectives, width=9.5cm, height=0.4cm, bordercolor={}, multiline=true]{}}\\
+\hdashline
+&&&\\
+\textbf{Mission Bundle Assigned:} & \multicolumn{3}{l |}{\TextField[name=mission-bundle, width=9.5cm, height=0.4cm, bordercolor={}, multiline=true]{}}\\
+\hdashline
+&&&\\
+\textbf{Objectives Achieved:} & \multicolumn{1}{p{2cm}}{\TextField[name=objectives-achieved, width=\hsize, height=0.4cm, bordercolor={}]{}} & \textbf{All Equipment Returned:} & \multicolumn{1}{p{2cm} |}{\TextField[name=equipment-returned, width=\hsize, height=0.4cm, bordercolor={}]{}}\\
+\hdashline
+&&&\\
+\textbf{Equipment Retrieved:} & \multicolumn{3}{l |}{\TextField[name=equipment-retrieved, width=9.5cm, height=0.4cm, bordercolor={}, multiline=true]{}}\\
+\hline
+&&&\\
+\multicolumn{4}{| c |}{\large{\textbf{Mission Synopsis}}}\\
+\hdashline
+&&&\\
+\multicolumn{4}{| p{12cm} |}{\TextField[name=synopsis, width=14.9cm, height=2cm, multiline=true, bordercolor={}]{}}\\
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
 
-%\begin{table}[ht]
-%\begin{adjustbox}{width=\columnwidth,center}
-%%\rowcolors{1}{white}{stargateblue}
-%\begin{tabular}{| l c l c |}
-%
-%\hline
-%
-%&&\multicolumn{2}{r |}{\multirow{3}{*}{\includegraphics[scale=.0575]{cover-images/Seal-USAF.png}}}\\
-%
-%\multicolumn{2}{| l}{\Large{\textbf{OPREP}}} &&\\
-%\multicolumn{2}{| l}{\large{\textbf{Operational Report}}} &&\\
-%\multicolumn{1}{| r}{\tiny{\textbf{FORM G7-R2}}} &&&\\
-%\hline
-%
-%&&&\\
-%\multicolumn{1}{| l}{\textbf{Date:}} & \multicolumn{3}{l |}{\cellcolor{offyellow}}\\
-%\hdashline
-%&&&\\
-%\multicolumn{1}{| l}{\textbf{Attachments:}} & \multicolumn{3}{r |}{\multirow{2}{*}{\cellcolor{offyellow}}}\\
-%\multicolumn{1}{| p{5cm}}{(Photos, Maps, Addendums, Additional Reports)} & \cellcolor{offyellow} & \cellcolor{offyellow} & \cellcolor{offyellow}\\
-%\hline
-%
-%&&&\\
-%\multicolumn{4}{| c |}{\large{\textbf{Mission Log/Report}}}\\
-%\hdashline
-%&&&\\
-%\textbf{World Name:} & \multicolumn{1}{l}{\multirow{2}{*}{\cellcolor{offyellow}}} & \multicolumn{2}{l |}{\multirow{2}{*}{\cellcolor{offyellow}}}\\
-%(Code \& Local Name) & \cellcolor{offyellow} & \cellcolor{offyellow} & \cellcolor{offyellow}\\
-%\hdashline
-%&&&\\
-%\textbf{Mission Duration:} & \multicolumn{3}{l |}{\cellcolor{offyellow}}\\
-%\hdashline
-%&&&\\
-%\textbf{Mission Objectives:} & \multicolumn{3}{l |}{\cellcolor{offyellow}}\\
-%\hdashline
-%&&&\\
-%\textbf{Mission Bundle Assigned:} & \multicolumn{3}{l |}{\cellcolor{offyellow}}\\
-%\hdashline
-%&&&\\
-%\textbf{Objectives Achieved:} & \multicolumn{1}{p{2cm}}{\hbox{\TextField[bordercolor=, borderwidth=1]{type here:}}} & \textbf{All Equipment Returned:} & \multicolumn{1}{p{2cm} |}{\cellcolor{offyellow}}\\
-%\hdashline
-%&&&\\
-%\textbf{Equipment Retrieved:} & \multicolumn{3}{l |}{\cellcolor{offyellow}}\\
-%\hline
-%
-%&&&\\
-%\multicolumn{4}{| c |}{\large{\textbf{Mission Synopsis}}}\\
-%\hdashline
-%&&&\\
-%\multicolumn{4}{| r |}{\multirow{6}{*}{\cellcolor{offyellow}}}\\
-%\multicolumn{4}{| l |}{\cellcolor{offyellow}}\\
-%\multicolumn{4}{| l |}{\cellcolor{offyellow}}\\
-%\multicolumn{4}{| l |}{\cellcolor{offyellow}}\\
-%\multicolumn{4}{| l |}{\cellcolor{offyellow}}\\
-%\multicolumn{4}{| l |}{\cellcolor{offyellow}}\\
-%\hline
-%
-%\end{tabular}
-%\end{adjustbox}
-%\end{table}
-
-
-
-
- \end{document}
+\end{document}
